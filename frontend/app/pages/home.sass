@@ -1,0 +1,40 @@
+.home
+    display: flex
+    flex-direction: column
+    gap: 32px
+    padding: 40px
+    flex: 1 0 auto
+    h1
+        font-size: 64px
+
+    &__data-row
+        display: flex
+        flex-direction: row
+        align-items: stretch
+        justify-content: space-between
+        width: 100%
+        gap: 1%
+        height: 100%
+
+    &__articles
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        gap: 16px
+    &__users
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        gap: 4px
+        p
+            display: flex
+            flex-direction: column
+            width: 100%
+            gap: 4px
+            border-bottom: 1px dotted black
+            padding-bottom: 4px
+    &__articles, &__users
+        width: 48%
+        padding: 8px
+        border: 1px solid black
+        border-radius: 10px
