@@ -1,0 +1,17 @@
+{
+  "node": {
+    "00a818e238cd7d700cd069d9cde16c56853f04d04c": {
+      "workers": {
+        "app/pages/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUser%5C%5Cprojects%5C%5Ctest-strapi%5C%5Cfrontend%5C%5Capp%5C%5Cpages%5C%5CtestDataRow.tsx%22%2C%5B%5B%2200a818e238cd7d700cd069d9cde16c56853f04d04c%22%2C%22default%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/pages/page": "rsc"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "LPC2G4U27P4sqEj24NGPxOvgLOwZFH30BX1DyPDfsKY="
+}
