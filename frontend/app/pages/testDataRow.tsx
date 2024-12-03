@@ -1,8 +1,6 @@
 'use server';
-
-import ArticleCard from '../components/articleCard/articleCard';
 import { apiGetArticles, apiGetUsers } from '../utils/api';
-
+import { ArticleCard } from '@/components';
 export default async function TestDataRow() {
 	const articles = await apiGetArticles();
 	const users = await apiGetUsers();

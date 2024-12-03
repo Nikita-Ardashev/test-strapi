@@ -1,4 +1,4 @@
-import './home.sass';
+import '@/styles/home.sass';
 import React from 'react';
 import TestDataRow from './testDataRow';
 import AnyData from './anyData';

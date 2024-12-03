@@ -19,7 +19,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/auth": ["./app/pages/api/auth/[...nextauth].ts"],
+      "@/styles/*": ["./app/styles/module/*"],
+      "@/components": ["./app/components/index.ts"],
+      "@/prisma": ["./app/lib/prisma.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

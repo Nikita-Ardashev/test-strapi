@@ -7,32 +7,36 @@ interface anyObject {
 }
 
 const AnyData = () => {
-	const jsonRender = (data: anyObject | anyObject[], nesting: number = 0) => {
+	const jsonRender = (data: anyObject | anyObject[], nesting: number = 1) => {
 		const codes: React.ReactElement[] = [];
 		const render = (obj: anyObject) => {
 			const keys = Object.keys(obj);
 			keys.forEach((key, i) => {
+				const isArray = Array.isArray(obj[key]);
 				if (
 					typeof obj[key] === 'object' &&
 					obj[key] !== null &&
 					obj[key] !== undefined
 				) {
-					const isArray = Array.isArray(obj[key]);
 					codes.push(
 						<code
 							style={{
 								paddingLeft: nesting * 32 * 1.5,
 							}}
-						>{`"${key}": ${isArray ? '[' : '{'}`}</code>,
+						>{`"${key}":`}</code>,
 						...jsonRender(obj[key], nesting + 1),
-						<code
-							style={{ paddingLeft: nesting * 32 }}
-						>{`${isArray ? '],' : '},'}`}</code>,
+						<code style={{ paddingLeft: nesting * 32 * 1.5 }}>
+							{isArray ? ']' : '},'}
+						</code>,
 					);
 					return;
 				}
 				if (i === 0)
-					codes.push(<code style={{ paddingLeft: nesting * 32 }}>{`{`}</code>);
+					codes.push(
+						<code style={{ paddingLeft: nesting * 32 }}>
+							{isArray ? '[' : '{'}
+						</code>,
+					);
 				codes.push(
 					<code
 						style={{ paddingLeft: (nesting === 0 ? 0.5 : nesting) * 32 * 1.5 }}
@@ -40,7 +44,11 @@ const AnyData = () => {
 					>{`"${key}": "${obj[key]}",`}</code>,
 				);
 				if (keys.length - 1 === i)
-					codes.push(<code style={{ paddingLeft: nesting * 32 }}>{`},`}</code>);
+					codes.push(
+						<code style={{ paddingLeft: nesting * 32 }}>
+							{isArray ? ']' : '},'}
+						</code>,
+					);
 			});
 		};
 		if (Array.isArray(data)) {
@@ -83,6 +91,7 @@ const AnyData = () => {
 				</button>
 			</div>
 			<span>
+				<code>{Array.isArray(anyData) ? '[' : '{'}</code>
 				{useMemo(() => {
 					if (anyData.length === 0) {
 						return <p>Вывод данных из БД</p>;
@@ -91,6 +100,7 @@ const AnyData = () => {
 						<React.Fragment key={i}>{node}</React.Fragment>
 					));
 				}, [anyData])}
+				<code>{Array.isArray(anyData) ? ']' : '}'}</code>{' '}
 			</span>
 		</div>
 	);
