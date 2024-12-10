@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "video_timestamps",
+  "info": {
+    "singularName": "video-timestamp",
+    "pluralName": "video-timestamps",
+    "displayName": "video_timestamp"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "second": {
+      "type": "biginteger"
+    },
+    "video": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::video.video",
+      "inversedBy": "video_timestamps"
+    }
+  }
+}

@@ -1,3 +1,6 @@
+import { register } from 'module';
+import { config } from 'process';
+
 export default () => ({
 	'schemas-to-ts': {
 		enabled: true,
@@ -5,4 +8,11 @@ export default () => ({
 			destinationFolder: 'src/types',
 		},
 	},
+	// 'users-permissions': {
+	// 	config: {
+	// 		register: {
+	// 			allowedFields: ['confirmed'],
+	// 		},
+	// 	},
+	// },
 });

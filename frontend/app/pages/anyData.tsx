@@ -13,6 +13,8 @@ const AnyData = () => {
 			const keys = Object.keys(obj);
 			keys.forEach((key, i) => {
 				const isArray = Array.isArray(obj[key]);
+				if (i === 0 && nesting !== 1)
+					codes.push(<code style={{ paddingLeft: nesting * 32 }}>{'{'}</code>);
 				if (
 					typeof obj[key] === 'object' &&
 					obj[key] !== null &&
@@ -21,34 +23,24 @@ const AnyData = () => {
 					codes.push(
 						<code
 							style={{
-								paddingLeft: nesting * 32 * 1.5,
+								paddingLeft: nesting * 32,
 							}}
-						>{`"${key}":`}</code>,
+						>{`"${key}": ${isArray ? '[' : ''}`}</code>,
 						...jsonRender(obj[key], nesting + 1),
-						<code style={{ paddingLeft: nesting * 32 * 1.5 }}>
-							{isArray ? ']' : '},'}
+						<code style={{ paddingLeft: nesting * 32 }}>
+							{isArray ? '],' : ''}
 						</code>,
 					);
-					return;
+				} else {
+					codes.push(
+						<code
+							style={{ paddingLeft: nesting * 64 }}
+							key={key + obj[key]}
+						>{`"${key}": "${obj[key]}",`}</code>,
+					);
 				}
-				if (i === 0)
-					codes.push(
-						<code style={{ paddingLeft: nesting * 32 }}>
-							{isArray ? '[' : '{'}
-						</code>,
-					);
-				codes.push(
-					<code
-						style={{ paddingLeft: (nesting === 0 ? 0.5 : nesting) * 32 * 1.5 }}
-						key={key + obj[key]}
-					>{`"${key}": "${obj[key]}",`}</code>,
-				);
-				if (keys.length - 1 === i)
-					codes.push(
-						<code style={{ paddingLeft: nesting * 32 }}>
-							{isArray ? ']' : '},'}
-						</code>,
-					);
+				if (keys.length - 1 === i && nesting !== 1)
+					codes.push(<code style={{ paddingLeft: nesting * 32 }}>{'},'}</code>);
 			});
 		};
 		if (Array.isArray(data)) {
@@ -67,7 +59,6 @@ const AnyData = () => {
 		apiGetAny(nameData)
 			.then((r) => {
 				setAnyData(r);
-				console.log(r);
 			})
 			.catch((e) => {
 				console.error(e);

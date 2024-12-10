@@ -1,7 +1,8 @@
 'use client';
 import { apiLogin } from '@/app/utils/api';
-import axios from 'axios';
 import React, { useState } from 'react';
+import '@/styles/auth.sass';
+import { signIn } from '@/auth';
 
 const Login = () => {
 	const [identifier, setIdentifier] = useState('');
@@ -22,9 +23,9 @@ const Login = () => {
 			});
 	};
 	return (
-		<div>
+		<div className="auth">
 			<form onSubmit={handleSubmit}>
-				<h1 className="font-bold text-3xl mb-6">Login</h1>
+				<h1>Login</h1>
 
 				<input
 					type="email"
@@ -42,10 +43,17 @@ const Login = () => {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 
-				{error && <div className="text-red-500">{error}</div>}
+				{error && <div>{error}</div>}
 
 				<button type="submit">Login</button>
 			</form>
+			<button
+				onClick={() => {
+					signIn('google');
+				}}
+			>
+				Signin with Google
+			</button>
 		</div>
 	);
 };

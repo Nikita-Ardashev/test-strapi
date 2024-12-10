@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/auth": ["./app/pages/api/auth/[...nextauth].ts"],
+      "@/auth": ["./auth.ts"],
       "@/styles/*": ["./app/styles/module/*"],
       "@/components": ["./app/components/index.ts"],
       "@/prisma": ["./app/lib/prisma.ts"]

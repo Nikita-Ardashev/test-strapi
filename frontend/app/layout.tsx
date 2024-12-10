@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './styles/layout.sass';
 import { Layout } from '@/components';
+import { SessionProvider } from 'next-auth/react';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -15,7 +16,9 @@ export default function RootLayout({
 	return (
 		<html lang="ru">
 			<body>
-				<Layout>{children}</Layout>
+				<SessionProvider>
+					<Layout>{children}</Layout>
+				</SessionProvider>
 			</body>
 		</html>
 	);

@@ -391,6 +391,102 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
 	};
 }
 
+export interface ApiCourseContentCourseContent extends Struct.CollectionTypeSchema {
+	collectionName: 'course_contents';
+	info: {
+		description: '';
+		displayName: 'course_content';
+		pluralName: 'course-contents';
+		singularName: 'course-content';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
+		createdAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+		locale: Schema.Attribute.String & Schema.Attribute.Private;
+		localizations: Schema.Attribute.Relation<
+			'oneToMany',
+			'api::course-content.course-content'
+		> &
+			Schema.Attribute.Private;
+		materials: Schema.Attribute.Relation<'oneToMany', 'api::material.material'>;
+		name: Schema.Attribute.UID & Schema.Attribute.Required;
+		publishedAt: Schema.Attribute.DateTime;
+		title: Schema.Attribute.String & Schema.Attribute.Required;
+		updatedAt: Schema.Attribute.DateTime;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+		videos: Schema.Attribute.Relation<'oneToMany', 'api::video.video'>;
+	};
+}
+
+export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
+	collectionName: 'courses';
+	info: {
+		description: '';
+		displayName: 'course';
+		pluralName: 'courses';
+		singularName: 'course';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		course_contents: Schema.Attribute.Relation<
+			'oneToMany',
+			'api::course-content.course-content'
+		>;
+		createdAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+		locale: Schema.Attribute.String & Schema.Attribute.Private;
+		localizations: Schema.Attribute.Relation<'oneToMany', 'api::course.course'> &
+			Schema.Attribute.Private;
+		publishedAt: Schema.Attribute.DateTime;
+		section: Schema.Attribute.UID & Schema.Attribute.Required;
+		src_telegram_bot: Schema.Attribute.String;
+		title: Schema.Attribute.String;
+		token_puzzle_bot: Schema.Attribute.String;
+		updatedAt: Schema.Attribute.DateTime;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+	};
+}
+
+export interface ApiMaterialMaterial extends Struct.CollectionTypeSchema {
+	collectionName: 'materials';
+	info: {
+		displayName: 'material';
+		pluralName: 'materials';
+		singularName: 'material';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		course_content: Schema.Attribute.Relation<
+			'manyToOne',
+			'api::course-content.course-content'
+		>;
+		createdAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+		locale: Schema.Attribute.String & Schema.Attribute.Private;
+		localizations: Schema.Attribute.Relation<'oneToMany', 'api::material.material'> &
+			Schema.Attribute.Private;
+		publishedAt: Schema.Attribute.DateTime;
+		src: Schema.Attribute.String;
+		title: Schema.Attribute.String;
+		updatedAt: Schema.Attribute.DateTime;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+	};
+}
+
 export interface ApiPostPost extends Struct.CollectionTypeSchema {
 	collectionName: 'posts';
 	info: {
@@ -441,6 +537,71 @@ export interface ApiTestTest extends Struct.CollectionTypeSchema {
 		updatedAt: Schema.Attribute.DateTime;
 		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
 			Schema.Attribute.Private;
+	};
+}
+
+export interface ApiVideoTimestampVideoTimestamp extends Struct.CollectionTypeSchema {
+	collectionName: 'video_timestamps';
+	info: {
+		displayName: 'video_timestamp';
+		pluralName: 'video-timestamps';
+		singularName: 'video-timestamp';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		createdAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+		locale: Schema.Attribute.String & Schema.Attribute.Private;
+		localizations: Schema.Attribute.Relation<
+			'oneToMany',
+			'api::video-timestamp.video-timestamp'
+		> &
+			Schema.Attribute.Private;
+		publishedAt: Schema.Attribute.DateTime;
+		second: Schema.Attribute.BigInteger;
+		title: Schema.Attribute.String;
+		updatedAt: Schema.Attribute.DateTime;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+		video: Schema.Attribute.Relation<'manyToOne', 'api::video.video'>;
+	};
+}
+
+export interface ApiVideoVideo extends Struct.CollectionTypeSchema {
+	collectionName: 'videos';
+	info: {
+		description: '';
+		displayName: 'video';
+		pluralName: 'videos';
+		singularName: 'video';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		course_content: Schema.Attribute.Relation<
+			'manyToOne',
+			'api::course-content.course-content'
+		>;
+		createdAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+		locale: Schema.Attribute.String & Schema.Attribute.Private;
+		localizations: Schema.Attribute.Relation<'oneToMany', 'api::video.video'> &
+			Schema.Attribute.Private;
+		publishedAt: Schema.Attribute.DateTime;
+		src: Schema.Attribute.String;
+		title: Schema.Attribute.String;
+		updatedAt: Schema.Attribute.DateTime;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+			Schema.Attribute.Private;
+		video_timestamps: Schema.Attribute.Relation<
+			'oneToMany',
+			'api::video-timestamp.video-timestamp'
+		>;
 	};
 }
 
@@ -924,8 +1085,13 @@ declare module '@strapi/strapi' {
 			'admin::transfer-token-permission': AdminTransferTokenPermission;
 			'admin::user': AdminUser;
 			'api::article.article': ApiArticleArticle;
+			'api::course-content.course-content': ApiCourseContentCourseContent;
+			'api::course.course': ApiCourseCourse;
+			'api::material.material': ApiMaterialMaterial;
 			'api::post.post': ApiPostPost;
 			'api::test.test': ApiTestTest;
+			'api::video-timestamp.video-timestamp': ApiVideoTimestampVideoTimestamp;
+			'api::video.video': ApiVideoVideo;
 			'plugin::content-releases.release': PluginContentReleasesRelease;
 			'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
 			'plugin::i18n.locale': PluginI18NLocale;
